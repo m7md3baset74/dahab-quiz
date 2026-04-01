@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { questions } from "@/data/questions";
-import QuestionCard from "@/components/QuestionsCard";
+import { questions } from "../../data/questions";
+import QuestionCard from "../../components/QuestionsCard";
 import { useRouter } from "next/navigation";
 
 export default function Game() {
