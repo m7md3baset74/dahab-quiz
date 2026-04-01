@@ -28,7 +28,7 @@ export default function Home() {
       </div>
 
       {/* 🌑 Overlay (عشان النص يبان) */}
-      <div className="absolute inset-0 backdrop-blur-xs  " />
+      <div className="absolute inset-0 backdrop-blur-custom bg-black/50 " />
 
       {/* ✨ Glow Effect */}
       {/* <div className="absolute w-[300px] h-[300px] bg-purple-600 opacity-30 blur-[120px] rounded-full top-20 left-1/2 -translate-x-1/2" /> */}

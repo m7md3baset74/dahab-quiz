@@ -22,3 +22,8 @@
 body {
   background: radial-gradient(circle at top, #0f172a, #020617);
 }
+
+
+.backdrop-blur-custom {
+  backdrop-filter: blur(1.5px); /* قيمة أقل من xs */
+}
