@@ -1,20 +1,63 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const router = useRouter();
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center text-white text-center">
-      <h1 className="text-4xl mb-6">😏 مين أكتر واحد فاهم الشلة؟</h1>
+    <div className="relative min-h-screen flex items-center justify-center text-white overflow-hidden">
 
-      <button
-        onClick={() => router.push("/game")}
-        className="bg-purple-600 px-6 py-3 rounded-xl text-lg hover:scale-105 transition"
+      {/* 🖼 Background Desktop */}
+      <div className="absolute inset-0 hidden md:block">
+        <img
+          src="/bg-desktop.png"
+          alt="bg"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* 🖼 Background Mobile */}
+      <div className="absolute inset-0 md:hidden">
+        <img
+          src="backgrounds/mobile.png"
+          alt="bg"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* 🌑 Overlay (عشان النص يبان) */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-black/30 via-black/65 to-black/40 " />
+
+      {/* ✨ Glow Effect */}
+      {/* <div className="absolute w-[300px] h-[300px] bg-purple-600 opacity-30 blur-[120px] rounded-full top-20 left-1/2 -translate-x-1/2" /> */}
+
+      {/* 🎮 Content */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="relative z-10 text-center px-4"
       >
-        يلا نبدأ 🔥
-      </button>
+        <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-relaxed">
+          😏 مين أكتر واحد <br />
+          فاهم الشلة؟
+        </h1>
+
+        <p className="text-gray-300 mb-8 text-sm md:text-lg">
+          اختبر نفسك وشوف إنت عارف صحابك قد إيه 😂🔥
+        </p>
+
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => router.push("/game")}
+          className="bg-purple-600 hover:bg-purple-700 px-8 py-4 rounded-2xl text-lg shadow-lg shadow-purple-500/30 transition"
+        >
+          يلا نبدأ 🔥
+        </motion.button>
+      </motion.div>
     </div>
   );
 }

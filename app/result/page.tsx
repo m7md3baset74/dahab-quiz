@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { questions } from "@/data/questions";
+import { questions } from "../../data/questions";
 import Confetti from "react-confetti";
 import { useEffect, useState } from "react";
 
@@ -29,7 +29,7 @@ export default function Result() {
   }
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center text-white text-center px-4">
+    <div className="min-h-screen flex flex-col items-center justify-center text-white text-center px-4">
 
       {showConfetti && <Confetti />}
 

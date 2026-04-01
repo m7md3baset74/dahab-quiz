@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { questions } from "../../data/questions";
-import QuestionCard from "../../components/QuestionsCard";
+import { questions } from "@/data/questions";
+import QuestionCard from "@/components/QuestionsCard";
 import { useRouter } from "next/navigation";
 
 export default function Game() {
@@ -13,10 +13,8 @@ export default function Game() {
 
   const router = useRouter();
 
-  // 🎧 background audio ref
   const bgAudioRef = useRef<HTMLAudioElement | null>(null);
 
-  // 🔊 تشغيل صوت الخلفية
   useEffect(() => {
     const audio = new Audio("/sounds/bg.mp3");
     audio.loop = true;
@@ -24,17 +22,13 @@ export default function Game() {
 
     bgAudioRef.current = audio;
 
-    // محاولة التشغيل (ممكن المتصفح يمنعها)
-    audio.play().catch(() => {
-      console.log("Autoplay blocked");
-    });
+    audio.play().catch(() => {});
 
     return () => {
       audio.pause();
     };
   }, []);
 
-  // 🔥 تشغيل الصوت بعد أول interaction (حل مشكلة autoplay)
   const startBgSound = () => {
     if (bgAudioRef.current) {
       bgAudioRef.current.play().catch(() => {});
@@ -47,7 +41,7 @@ export default function Game() {
   };
 
   const handleAnswer = (answer: string) => {
-    startBgSound(); // 👈 أول ما يضغط يبدأ الصوت
+    startBgSound();
 
     const correct = questions[current].correctAnswer;
 
@@ -73,36 +67,58 @@ export default function Game() {
           `/result?score=${score + (answer === correct ? 1 : 0)}`
         );
       }
-    }, 1500);
+    }, 1200);
   };
 
   const progress = ((current + 1) / questions.length) * 100;
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center text-white px-4">
+    <div className="p-12 relative min-h-screen flex flex-col items-center justify-center text-white px-4 overflow-hidden">
 
-      {/* Progress Bar */}
-      <div className="w-full max-w-md mb-6">
-        <div className="h-2 bg-slate-700 rounded">
-          <div
-            className="h-2 bg-purple-500 rounded transition-all"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
+      {/* 🖼 Mobile Background ONLY */}
+      <div className="absolute inset-0 md:hidden">
+        <img
+          src="backgrounds/room.jpg"
+          alt="bg"
+          className="w-full h-full object-cover"
+        />
       </div>
 
-      {/* Question */}
-      <QuestionCard
-        question={questions[current]}
-        onAnswer={handleAnswer}
-      />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40 md:bg-transparent " />
 
-      {/* Feedback */}
-      {showFeedback && (
-        <div className="mt-6 text-xl animate-bounce">
-          {feedback}
+      {/* Glow */}
+      {/* <div className="absolute w-[250px] h-[250px] bg-purple-600 opacity-20 blur-[100px] rounded-full top-10 left-1/2 -translate-x-1/2" /> */}
+
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-md">
+
+        {/* Progress */}
+        <div className="mb-6">
+          <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-purple-500 transition-all duration-500"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+          <p className="text-xs text-gray-200 mt-2 text-center">
+            سؤال {current + 1} من {questions.length}
+          </p>
         </div>
-      )}
+
+        {/* Question */}
+        <QuestionCard
+          question={questions[current]}
+          onAnswer={handleAnswer}
+        />
+
+        {/* Feedback */}
+        {showFeedback && (
+          <div className="mt-6 text-center text-lg animate-bounce">
+            {feedback}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
