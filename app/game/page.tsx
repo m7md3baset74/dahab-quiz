@@ -50,7 +50,7 @@ export default function Game() {
       setFeedback("براڤو علييييك 🔥🔥");
       playCorrectSound();
     } else {
-      setFeedback(`غلط 😂 الإجابة كانت ${correct}`);
+      setFeedback(`${correct} غلط 😂 الإجابة كانت `);
     }
 
     setShowFeedback(true);
@@ -114,9 +114,20 @@ export default function Game() {
 
         {/* Feedback */}
         {showFeedback && (
-          <div className="mt-6 text-center text-lg animate-bounce">
-            {feedback}
-          </div>
+          <div className="absolute inset-0 z-20 flex items-center justify-center">
+
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-black/10 backdrop-blur-custom" />
+
+    {/* Message */}
+    <div className="relative z-10 text-center">
+
+      <div className="text-3xl font-bold animate-scaleIn">
+        {feedback}
+      </div>
+
+    </div>
+  </div>
         )}
       </div>
     </div>

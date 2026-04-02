@@ -27,3 +27,18 @@ body {
 .backdrop-blur-custom {
   backdrop-filter: blur(1.5px); /* قيمة أقل من xs */
 }
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.3s ease-out;
+}
