@@ -34,7 +34,7 @@ export default function ResultContent() {
 
       {showConfetti && <Confetti />}
 
-      <h1 className="text-4xl mb-4">سكورك: {score}</h1>
+      <h1 className="text-4xl mb-4">سكورك: {score}/5</h1>
 
       <p className="text-xl mb-6">{message}</p>
 

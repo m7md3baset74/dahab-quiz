@@ -40,12 +40,12 @@ export default function Home() {
         transition={{ duration: 0.8 }}
         className="relative z-10 text-center px-4"
       >
-        <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-relaxed">
-          😏 مين أكتر واحد <br />
-          فاهم الشلة؟
+        <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-relaxed">
+           عادات سفرية<br />
+           🤡 ربنا يقطعها
         </h1>
 
-        <p className="text-gray-300 mb-8 text-sm md:text-lg">
+        <p className="text-gray-300 mb-6 text-sm md:text-lg">
           اختبر نفسك وشوف إنت عارف صحابك قد إيه 😂🔥
         </p>
 
@@ -53,7 +53,7 @@ export default function Home() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => router.push("/game")}
-          className="bg-purple-600 hover:bg-purple-700 px-8 py-4 rounded-2xl text-lg shadow-lg shadow-purple-500/30 transition"
+          className="bg-purple-600/60 hover:bg-purple-700/60 px-8 py-4 rounded-2xl text-lg shadow-lg shadow-purple-500/30 transition"
         >
           يلا نبدأ 🔥
         </motion.button>
