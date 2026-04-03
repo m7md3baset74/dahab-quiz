@@ -119,9 +119,9 @@ export default function Game() {
 
             {/* Feedback Card */}
             <div
-              className={`relative z-10 bg-slate-900/30 backdrop-blur-xs border-1 border-purple-500 rounded-xl px-16 py-20  
+              className={`relative z-10 bg-green-500/5 backdrop-blur-xs border-1 border-purple-500 rounded-xl px-16 py-20  
         text-center text-white shadow-lg animate-scaleIn
-        ${feedback.includes("غلط") ? "animate-shake" : ""}`}
+        ${feedback.includes("غلط") ? "animate-shake bg-red-500/5 px-16 py-20" : ""}`}
             >
               <div className="text-2xl md:text-3xl font-bold">{feedback}</div>
             </div>
