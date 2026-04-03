@@ -28,6 +28,7 @@ body {
   backdrop-filter: blur(1.5px); /* قيمة أقل من xs */
 }
 
+/* Scale In */
 @keyframes scaleIn {
   0% {
     transform: scale(0.7);
@@ -38,7 +39,16 @@ body {
     opacity: 1;
   }
 }
-
 .animate-scaleIn {
   animation: scaleIn 0.3s ease-out;
+}
+
+/* Shake for wrong answer */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
 }

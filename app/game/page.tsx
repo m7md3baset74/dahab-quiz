@@ -48,9 +48,16 @@ export default function Game() {
     if (answer === correct) {
       setScore((prev) => prev + 1);
       setFeedback("براڤو علييييك 🔥🔥");
+      if (
+        answer !== correct &&
+        typeof window !== "undefined" &&
+        navigator.vibrate
+      ) {
+        navigator.vibrate(200); // اهتزاز 200ms
+      }
       playCorrectSound();
     } else {
-      setFeedback(`${correct} غلط 😂 الإجابة كانت `);
+      setFeedback(`غلط 😂 الاجابة كانت ${correct}`);
     }
 
     setShowFeedback(true);
@@ -63,9 +70,7 @@ export default function Game() {
       if (next < questions.length) {
         setCurrent(next);
       } else {
-        router.push(
-          `/result?score=${score + (answer === correct ? 1 : 0)}`
-        );
+        router.push(`/result?score=${score + (answer === correct ? 1 : 0)}`);
       }
     }, 1200);
   };
@@ -74,7 +79,6 @@ export default function Game() {
 
   return (
     <div className="p-12 relative min-h-screen flex flex-col items-center justify-center text-white px-4 overflow-hidden">
-
       {/* 🖼 Mobile Background ONLY */}
       <div className="absolute inset-0 md:hidden">
         <img
@@ -92,7 +96,6 @@ export default function Game() {
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-md">
-
         {/* Progress */}
         <div className="mb-6">
           <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
@@ -107,27 +110,22 @@ export default function Game() {
         </div>
 
         {/* Question */}
-        <QuestionCard
-          question={questions[current]}
-          onAnswer={handleAnswer}
-        />
+        <QuestionCard question={questions[current]} onAnswer={handleAnswer} />
 
         {/* Feedback */}
         {showFeedback && (
-          <div className="absolute inset-0 z-20 flex items-center justify-center">
+          <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+            
 
-    {/* Overlay */}
-    <div className="absolute inset-0 bg-black/10 backdrop-blur-custom" />
-
-    {/* Message */}
-    <div className="relative z-10 text-center">
-
-      <div className="text-3xl font-bold animate-scaleIn">
-        {feedback}
-      </div>
-
-    </div>
-  </div>
+            {/* Feedback Card */}
+            <div
+              className={`relative z-10 bg-slate-900/30 backdrop-blur-xs border-1 border-purple-500 rounded-xl px-16 py-20  
+        text-center text-white shadow-lg animate-scaleIn
+        ${feedback.includes("غلط") ? "animate-shake" : ""}`}
+            >
+              <div className="text-2xl md:text-3xl font-bold">{feedback}</div>
+            </div>
+          </div>
         )}
       </div>
     </div>
